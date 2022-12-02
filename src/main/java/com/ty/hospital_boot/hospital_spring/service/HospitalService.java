@@ -32,7 +32,7 @@ public class HospitalService {
 			responseStructure.setMessage("Updated");
 			responseStructure.setData(hospital);
 		}else {
-			throw new NoSuchUserUpdate("No Such Id To Be Updated");
+			throw new NoSuchIdUpdate("No Such Id To Be Updated");
 		}
 		return responseEntity;
 	}

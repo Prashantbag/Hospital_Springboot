@@ -14,14 +14,7 @@ public class BranchService {
 	@Autowired
 private BranchDao dao;
 	
-	public ResponseEntity<ResponseStructure<Branch>> saveBranch(Branch branch){
-		ResponseStructure<Branch> responseStructure=new ResponseStructure<Branch>();
-		ResponseEntity<ResponseStructure<Branch>> responseEntity=new ResponseEntity<ResponseStructure<Branch>>(responseStructure,HttpStatus.OK);
-		responseStructure.setStatus(HttpStatus.CREATED.value());
-		responseStructure.setMessage("Saved");
-		responseStructure.setData(dao.saveBranch(branch));
-		return responseEntity;
-	}
+	
 	public ResponseEntity<ResponseStructure<Branch>> updateBranchById(Branch branch,int id){
 		ResponseStructure<Branch> responseStructure=new ResponseStructure<Branch>();
 		ResponseEntity<ResponseStructure<Branch>> responseEntity=new ResponseEntity<ResponseStructure<Branch>>(responseStructure,HttpStatus.OK);
@@ -39,6 +32,15 @@ private BranchDao dao;
 	public ResponseEntity<ResponseStructure<Branch>> getBranchById(int id){
 		ResponseStructure<Branch> responseStructure=new ResponseStructure<Branch>();
 		ResponseEntity<ResponseStructure<Branch>> responseEntity=new ResponseEntity<ResponseStructure<Branch>>(responseStructure,HttpStatus.OK);
+	Branch branch=dao.getBranchById(id);
+	if(branch!=null) {
+		responseStructure.setStatus(HttpStatus.OK.value());
+		responseStructure.setMessage("received");
+		responseStructure.setData(dao.getBranchById());
+		}else {
+		throw new NoSuchIdFoundException("No Such Id Found");
 	}
-
+	return responseEntity;
+	}
+	
 }
