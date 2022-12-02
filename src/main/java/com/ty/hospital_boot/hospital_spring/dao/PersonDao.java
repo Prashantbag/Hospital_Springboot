@@ -37,7 +37,7 @@ public class PersonDao {
 			person2=null;
 		}
 		if(person2!=null) {
-			person.setId(int id);
+			person.setId(id);
 			personRepository.save(person);
 		    return person;	
 		}else {
