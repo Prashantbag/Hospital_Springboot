@@ -8,6 +8,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
+import javax.validation.constraints.NotNull;
 
 @Entity
 public class Medorder {
@@ -15,7 +16,9 @@ public class Medorder {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
+	@NotNull
 	private String prescribedBy;
+	@NotNull
 	private int duration;
 	
 	@OneToMany(cascade = CascadeType.ALL)
