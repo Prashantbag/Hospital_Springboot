@@ -18,7 +18,7 @@ public class Person {
 	private String personName;
 	private int age;
 	
-	@OneToMany
+	@OneToMany(cascade = CascadeType.ALL)
 	private List<Encounter> encounter;
 
 	public int getId() {

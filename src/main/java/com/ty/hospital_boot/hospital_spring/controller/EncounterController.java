@@ -55,17 +55,7 @@ public class EncounterController {
 
 	}
 	
-	@ApiOperation(value = "Save Encounter ", notes = "It is used to save the Encounter")
-	@ApiResponses(value = { @ApiResponse(code = 201, message = "created"),
-			@ApiResponse(code = 500, message = "Internal Server Error"),
-			@ApiResponse(code = 404, message = "Not found") })
-	
-	@PostMapping(consumes = { MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_ATOM_XML_VALUE }, produces = {
-			MediaType.APPLICATION_JSON_VALUE })
-	public  ResponseEntity<ResponseStructure<Person>> saveEncounter(@RequestBody Encounter encounter,@PathVariable int pid,@RequestParam int bid){
-		return encounterService.saveEncounter(encounter, pid, bid);
-		
-	}
+
 	
 
 

@@ -62,7 +62,7 @@ private	HospitalService hospitalService;
 		@ApiResponses(value = { @ApiResponse(code = 201, message = "created"),
 				@ApiResponse(code = 500, message = "internal ServerError"),
 				@ApiResponse(code = 404, message = "notfound") })
-		@DeleteMapping(value="/{id}",produces = {MediaType.APPLICATION_JSON_VALUE })
+		@DeleteMapping(produces = {MediaType.APPLICATION_JSON_VALUE })
 		public ResponseEntity<ResponseStructure<String>> deleteHospitalById(@RequestParam int id) {
 			return hospitalService.deleteHospitalById(id);
 		
