@@ -41,4 +41,9 @@ public class EncounterDao {
 		}
 		
 	}
+	
+	public Encounter saveEncounter(Encounter encounter) {
+		
+		return encounterRepository.save(encounter);
+	}
 }
