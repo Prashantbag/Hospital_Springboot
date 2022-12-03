@@ -22,20 +22,12 @@ import io.swagger.annotations.ApiResponses;
 
 @RestController
 @RequestMapping("address")
-public class AddresssController {
+public class AddressController {
 
 	@Autowired
 	private AddressService addressService;
 
-	@ApiOperation(value = "Save Addresses", notes = "It is used to save the Address")
-	@ApiResponses(value = { @ApiResponse(code = 201, message = "created"),
-			@ApiResponse(code = 500, message = "Internal Server Error"),
-			@ApiResponse(code = 404, message = "Not found") })
-	@PostMapping(consumes = { MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_ATOM_XML_VALUE }, produces = {
-			MediaType.APPLICATION_JSON_VALUE })
-	public ResponseEntity<ResponseStructure<Address>> saveAddress(@RequestBody Address address) {
-		return addressService.saveAddress(address);
-	}
+
 
 	@ApiOperation(value = "Update Addresses", notes = "It is used to update the Address")
 	@ApiResponses(value = { @ApiResponse(code = 201, message = "created"),
@@ -43,9 +35,9 @@ public class AddresssController {
 			@ApiResponse(code = 500, message = "internal ServerError"),
 			@ApiResponse(code = 404, message = "notfound") })
 	@PutMapping(consumes = {MediaType.APPLICATION_JSON_VALUE,MediaType.APPLICATION_XML_VALUE}, produces = {MediaType.APPLICATION_JSON_VALUE})
-	public ResponseEntity<ResponseStructure<Address>> updateAddress(@RequestBody Address address,
+	public ResponseEntity<ResponseStructure<Address>> updateAddressById(@RequestBody Address address,
 			@RequestParam int id) {
-		return addressService.updateAddress(address, id);
+		return addressService.updateAddressById(address, id);
 
 	}
 	@ApiOperation(value = "Fetch Addresses By Id", notes = "It is used to Fetch the  Address")
@@ -55,17 +47,9 @@ public class AddresssController {
 			@ApiResponse(code = 404, message = "Not found") })
 	@GetMapping( produces = {MediaType.APPLICATION_JSON_VALUE})
 	public ResponseEntity<ResponseStructure<Address>> getAddressById(@RequestParam int id) {
-		return addressService.getAddress(id);
+		return addressService.getAddressById(id);
 
 	}
-	@ApiOperation(value = "Delete Addresses By Id", notes = "It is used to Delete the  Address")
-	@ApiResponses(value = { 
-			@ApiResponse(code = 302, message="Found"),
-			@ApiResponse(code = 500, message = "Internal Server Error"),
-			@ApiResponse(code = 404, message = "Not found") })
-	@DeleteMapping(value="/{id}",produces = {MediaType.APPLICATION_JSON_VALUE})
-	public ResponseEntity<ResponseStructure<String>> deleteAddressById(@RequestParam int id) {
-		return addressService.deleteAddress(id);
-
-	}
+	
+	
 }

@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import com.ty.hospital_boot.hospital_spring.dao.AddressDao;
 import com.ty.hospital_boot.hospital_spring.dto.Address;
+import com.ty.hospital_boot.hospital_spring.exception.NoSuchIdFoundException;
 import com.ty.hospital_boot.hospital_spring.util.ResponseStructure;
 
 @Service
@@ -25,7 +26,7 @@ public class AddressService {
 			responseStructure.setMessage("updated");
 			responseStructure.setData(dao.saveAddress(address));
 		}else {
-			throw new NoSuchIdUpdate("No Such Id To Be Updated");
+			throw new NoSuchIdFoundException();
 		}
 		return responseEntity;
 	}

@@ -14,6 +14,11 @@ public class AddressDao {
 	@Autowired
 	AddressRepository addressRepository;
 	
+	public Address saveAddress(Address address) {
+		return addressRepository.save(address);
+	}
+	
+	
 	public Address getAddressById(int id) {
 		Optional<Address> optional=addressRepository.findById(id);
 		if(optional.isPresent()) {

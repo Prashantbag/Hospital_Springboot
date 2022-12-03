@@ -22,4 +22,8 @@ public class MedorderDao {
 			return null;
 		}
 	}
+	
+	public Medorder updateMedorder(Medorder medorder) {
+		return medorderRepository.save(medorder);
+	}
 }

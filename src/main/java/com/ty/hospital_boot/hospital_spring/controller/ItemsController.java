@@ -22,29 +22,20 @@ import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;
 
 @RestController
-@RequestMapping("Items")
+@RequestMapping("items")
 public class ItemsController {
 	@Autowired
 	private ItemsService itemsService;
 
-	@ApiOperation(value = "Save Items", notes = "It is used to save the Items ")
-	@ApiResponses(value = { @ApiResponse(code = 201, message = "created"),
-			@ApiResponse(code = 500, message = "internal ServerError"),
-			@ApiResponse(code = 404, message = "notfound") })
-	@PostMapping(consumes = { MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_ATOM_XML_VALUE }, produces = {
-			MediaType.APPLICATION_JSON_VALUE })
-	public ResponseEntity<ResponseStructure<Items>> saveItems(@RequestBody Items items) {
-		return itemsService.saveItems(items);
-	}
+	
 
 	@ApiOperation(value = "update Items", notes = "It is used to Update The Items")
 	@ApiResponses(value = { @ApiResponse(code = 201, message = "created"),
 			@ApiResponse(code = 500, message = "internal ServerError"),
 			@ApiResponse(code = 404, message = "notfound") })
-	@PutMapping(consumes = { MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_ATOM_XML_VALUE }, produces = {
-			MediaType.APPLICATION_JSON_VALUE })
-	public ResponseEntity<ResponseStructure<Items>> updateItems(@RequestBody Items items, @RequestParam int id) {
-		return itemsService.updateItems(items, id);
+	@PutMapping(consumes = { MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_ATOM_XML_VALUE }, produces = {MediaType.APPLICATION_JSON_VALUE })
+	public ResponseEntity<ResponseStructure<Items>> updateItemsById(@RequestBody Items items, @RequestParam int id) {
+		return itemsService.updateItemsById(items, id);
 
 	}
 
@@ -52,22 +43,12 @@ public class ItemsController {
 	@ApiResponses(value = { @ApiResponse(code = 201, message = "created"),
 			@ApiResponse(code = 500, message = "internal ServerError"),
 			@ApiResponse(code = 404, message = "notfound") })
-	@GetMapping(produces = {
-			MediaType.APPLICATION_JSON_VALUE })
+	@GetMapping(produces = {MediaType.APPLICATION_JSON_VALUE })
 	public ResponseEntity<ResponseStructure<Items>> getItemsById(@RequestParam int id) {
-		return itemsService.getItems(id);
+		return itemsService.getItemsById(id);
 
 	}
 
-	@ApiOperation(value = "Delete Items by Id", notes = "It is used to delete the Items by Id")
-	@ApiResponses(value = { @ApiResponse(code = 201, message = "created"),
-			@ApiResponse(code = 500, message = "internal ServerError"),
-			@ApiResponse(code = 404, message = "notfound") })
-	@DeleteMapping(value="/{id}",produces = {
-			MediaType.APPLICATION_JSON_VALUE })
-	public ResponseEntity<ResponseStructure<String>> deleteItemsById(@RequestParam int id) {
-		return itemsService.deleteitems(id);
 
-	}
 
 }

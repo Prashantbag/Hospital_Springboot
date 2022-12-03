@@ -7,7 +7,9 @@ import org.springframework.stereotype.Service;
 
 import com.ty.hospital_boot.hospital_spring.dao.MedorderDao;
 import com.ty.hospital_boot.hospital_spring.dto.Encounter;
+import com.ty.hospital_boot.hospital_spring.dto.Hospital;
 import com.ty.hospital_boot.hospital_spring.dto.Medorder;
+import com.ty.hospital_boot.hospital_spring.exception.NoSuchIdFoundException;
 import com.ty.hospital_boot.hospital_spring.util.ResponseStructure;
 
 @Service
@@ -15,33 +17,37 @@ public class MedorderService {
 	@Autowired
 	private MedorderDao dao;
 	
-	public ResponseEntity<ResponseStructure<Medorder>> updateAddressById(Encounter encounter,int id){
-		ResponseStructure<Encounter> responseStructure=new ResponseStructure<Encounter>();
-		ResponseEntity<ResponseStructure<Encounter>> responseEntity=new ResponseEntity<ResponseStructure<Encounter>>(responseStructure,HttpStatus.OK);
-		Encounter encounter2=dao.getEncounterById(id);
-		if(encounter2!=null) {
-			encounter.setId(id);
+	public ResponseEntity<ResponseStructure<Medorder>> updateMedorderById(Medorder medorder,int id){
+		ResponseStructure<Medorder> responseStructure=new ResponseStructure<Medorder>();
+		Medorder medorder2=dao.getMedorderById(id);
+		if(medorder2!=null) {
+			medorder.setId(id);
 			responseStructure.setStatus(HttpStatus.OK.value());
 			responseStructure.setMessage("updated");
-			responseStructure.setData(dao.saveEncounter(encounter));
+			responseStructure.setData(dao.updateMedorder(medorder));
 		}else {
-			throw new NoSuchIdUpdate("No Such Id To Be Updated");
+			throw new NoSuchIdFoundException("No Such Id To Be Updated");
 		}
+		ResponseEntity<ResponseStructure<Medorder>> responseEntity=new ResponseEntity<ResponseStructure<Medorder>>(responseStructure,HttpStatus.OK);
+
 		return responseEntity;
 	}
-	public ResponseEntity<ResponseStructure<Encounter>> getAddressById(int id){
-		ResponseStructure<Encounter> responseStructure=new ResponseStructure<Encounter>();
-		ResponseEntity<ResponseStructure<Encounter>> responseEntity=new ResponseEntity<ResponseStructure<Encounter>>(responseStructure,HttpStatus.OK);
-		Encounter encounter=dao.getEncounterById(id);
-		if(encounter!=null) {
+	public ResponseEntity<ResponseStructure<Medorder>> getMedorderById(int id){
+		ResponseStructure<Medorder> responseStructure=new ResponseStructure<Medorder>();
+		Medorder medorder2=dao.getMedorderById(id);
+		if(medorder2!=null) {
 			responseStructure.setStatus(HttpStatus.OK.value());
 			responseStructure.setMessage("received");
-			responseStructure.setData(dao.getEncounterById(id));
+			responseStructure.setData(dao.getMedorderById(id));
 		}else {
 			throw new NoSuchIdFoundException("No Such Id Found");
 		}
+		ResponseEntity<ResponseStructure<Medorder>> responseEntity=new ResponseEntity<ResponseStructure<Medorder>>(responseStructure,HttpStatus.OK);
+
 		return responseEntity;
 	}
+	
+	
 	
 	
 

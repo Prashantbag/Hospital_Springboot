@@ -22,33 +22,21 @@ import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;
 
 @RestController
-@RequestMapping("Medorder")
+@RequestMapping("medorder")
 public class MedorderController {
 
 	@Autowired
 	 private MedorderService medorderService ;
 	
 	
-	@ApiOperation(value = "Save Medorder", notes = "It is used to save the medorder")
-	@ApiResponses(value = { @ApiResponse(code = 201, message = "created"),
-			@ApiResponse(code = 500, message = "internal ServerError"),
-			@ApiResponse(code = 404, message = "notfound") })
-	@PostMapping(consumes = { MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_ATOM_XML_VALUE }, produces = {
-			MediaType.APPLICATION_JSON_VALUE })
-	public ResponseEntity<ResponseStructure<Medorder>> saveMedorder(@RequestBody Medorder medorder
-			) {
-		return medorderService .saveMedorder(medorder);
-	}
 
 	@ApiOperation(value = "update Medorder", notes = "It is used to update the medorder")
 	@ApiResponses(value = { @ApiResponse(code = 201, message = "created"),
 			@ApiResponse(code = 500, message = "internal ServerError"),
 			@ApiResponse(code = 404, message = "notfound") })
-	@PutMapping(consumes = { MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_ATOM_XML_VALUE }, produces = {
-			MediaType.APPLICATION_JSON_VALUE })
-	public ResponseEntity<ResponseStructure<Medorder>> updateMedorder(@RequestBody Medorder medorder,
-			@RequestParam int id) {
-		return  medorderService.updateMedorder( medorder, id);
+	@PutMapping(consumes = { MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_ATOM_XML_VALUE }, produces = {MediaType.APPLICATION_JSON_VALUE })
+	public ResponseEntity<ResponseStructure<Medorder>> updateMedorder(@RequestBody Medorder medorder,@RequestParam int id) {
+		return  medorderService.updateMedorderById( medorder, id);
 
 	}
 
@@ -57,24 +45,14 @@ public class MedorderController {
 	@ApiResponses(value = { @ApiResponse(code = 201, message = "created"),
 			@ApiResponse(code = 500, message = "internal ServerError"),
 			@ApiResponse(code = 404, message = "notfound") })
-	@GetMapping(produces = {
-			MediaType.APPLICATION_JSON_VALUE })
+	@GetMapping(produces = {MediaType.APPLICATION_JSON_VALUE })
 	public ResponseEntity<ResponseStructure<Medorder>> getMedorderById(@RequestParam int id) {
-		return medorderService.getMedorder(id);
+		return medorderService.getMedorderById(id);
 
 	}
 
 
-	@ApiOperation(value = "Delete Medorder by Id", notes = "It is used delete the medorder By Id")
-	@ApiResponses(value = { @ApiResponse(code = 201, message = "created"),
-			@ApiResponse(code = 500, message = "internal ServerError"),
-			@ApiResponse(code = 404, message = "notfound") })
-	@DeleteMapping(value="/{id}",produces = {
-			MediaType.APPLICATION_JSON_VALUE })
-	public ResponseEntity<ResponseStructure<String>> deleteMedorderById(@RequestParam int id) {
-		return medorderService.deleteMedorder(id);
 
-	}
 	
 }
 	

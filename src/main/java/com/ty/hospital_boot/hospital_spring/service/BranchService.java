@@ -7,40 +7,48 @@ import org.springframework.stereotype.Service;
 
 import com.ty.hospital_boot.hospital_spring.dao.BranchDao;
 import com.ty.hospital_boot.hospital_spring.dto.Branch;
+import com.ty.hospital_boot.hospital_spring.exception.NoSuchIdFoundException;
 import com.ty.hospital_boot.hospital_spring.util.ResponseStructure;
 
 @Service
 public class BranchService {
 	@Autowired
-private BranchDao dao;
+	private BranchDao dao;
 	
 	
-	public ResponseEntity<ResponseStructure<Branch>> updateBranchById(Branch branch,int id){
+	public ResponseEntity<ResponseStructure<Branch>> updateBranch(Branch branch,int id){
 		ResponseStructure<Branch> responseStructure=new ResponseStructure<Branch>();
-		ResponseEntity<ResponseStructure<Branch>> responseEntity=new ResponseEntity<ResponseStructure<Branch>>(responseStructure,HttpStatus.OK);
+
 		Branch branch2=dao.getBranchById(id);
 		if(branch2!=null) {
 			branch.setId(id);
 			responseStructure.setStatus(HttpStatus.OK.value());
 			responseStructure.setMessage("Updated");
-			responseStructure.setData(dao.updateBranchById());
+			responseStructure.setData(dao.updateBranch(branch,id));
 		}else {
-			throw new NoSuchIdUpdate("No Such Id To Be Updated");
+			throw new NoSuchIdFoundException("No Such Id To Be Updated");
 		}
+		
+		ResponseEntity<ResponseStructure<Branch>> responseEntity=new ResponseEntity<ResponseStructure<Branch>>(responseStructure,HttpStatus.OK);
+
 		return responseEntity;
 	}
+	
 	public ResponseEntity<ResponseStructure<Branch>> getBranchById(int id){
 		ResponseStructure<Branch> responseStructure=new ResponseStructure<Branch>();
+
+		Branch branch=dao.getBranchById(id);
+		if(branch!=null) {
+			responseStructure.setStatus(HttpStatus.OK.value());
+			responseStructure.setMessage("received");
+			responseStructure.setData(dao.getBranchById(id));
+			}else {
+			throw new NoSuchIdFoundException("No Such Id Found");
+		}
+		
 		ResponseEntity<ResponseStructure<Branch>> responseEntity=new ResponseEntity<ResponseStructure<Branch>>(responseStructure,HttpStatus.OK);
-	Branch branch=dao.getBranchById(id);
-	if(branch!=null) {
-		responseStructure.setStatus(HttpStatus.OK.value());
-		responseStructure.setMessage("received");
-		responseStructure.setData(dao.getBranchById());
-		}else {
-		throw new NoSuchIdFoundException("No Such Id Found");
-	}
-	return responseEntity;
-	}
+
+		return responseEntity;
+		}
 	
 }

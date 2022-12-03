@@ -22,53 +22,49 @@ import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;
 
 @RestController
-@RequestMapping("Hospital")
+@RequestMapping("hospital")
 public class HospitalController {
 
 @Autowired
 private	HospitalService hospitalService;
 	
-@ApiOperation(value = "Save Hospital", notes = "It is used to save the Hospital")
-@ApiResponses(value = { @ApiResponse(code = 201, message = "created"),
-		@ApiResponse(code = 500, message = "internal ServerError"),
-		@ApiResponse(code = 404, message = "notfound") })
-@PostMapping(consumes = { MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_ATOM_XML_VALUE }, produces = {
-		MediaType.APPLICATION_JSON_VALUE })
-public ResponseEntity<ResponseStructure<Hospital>> saveHospital(@RequestBody Hospital hospital) {
-	return hospitalService.savehospital(hospital);
-}
-
-@ApiOperation(value = "Update Hospital", notes = "It is used to update the hospital")
-@ApiResponses(value = { @ApiResponse(code = 201, message = "created"),
-		@ApiResponse(code = 500, message = "internal ServerError"),
-		@ApiResponse(code = 404, message = "notfound") })
-@PutMapping(consumes = { MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_ATOM_XML_VALUE }, produces = {
-		MediaType.APPLICATION_JSON_VALUE })
-public ResponseEntity<ResponseStructure<Hospital>> updatehospital(@RequestBody Hospital hospital,
-		@RequestParam int id) {
-	return hospitalService.updatehospital(hospital, id);
-
-}
-
-@ApiOperation(value = "Get hospital by Id", notes = "It is used to get the hospital by Id")
-@ApiResponses(value = { @ApiResponse(code = 201, message = "created"),
-		@ApiResponse(code = 500, message = "internal ServerError"),
-		@ApiResponse(code = 404, message = "notfound") })
-@GetMapping(produces = {
-		MediaType.APPLICATION_JSON_VALUE })
-public ResponseEntity<ResponseStructure<Hospital>> getHospitalById(@RequestParam int id) {
-	return hospitalService.gethospital(id);
-
-}
-
-@ApiOperation(value = "Delete hospital by Id", notes = "It is used to delete the hospital by Id")
-@ApiResponses(value = { @ApiResponse(code = 201, message = "created"),
-		@ApiResponse(code = 500, message = "internal ServerError"),
-		@ApiResponse(code = 404, message = "notfound") })
-@DeleteMapping(value="/{id}",produces = {
-		MediaType.APPLICATION_JSON_VALUE })
-public ResponseEntity<ResponseStructure<String>> deletehospitalById(@RequestParam int id) {
-	return hospitalService.deletehospital(id);
-
-}
+		@ApiOperation(value = "Save Hospital", notes = "It is used to save the Hospital")
+		@ApiResponses(value = { @ApiResponse(code = 201, message = "created"),
+				@ApiResponse(code = 500, message = "internal ServerError"),
+				@ApiResponse(code = 404, message = "notfound") })
+		@PostMapping(consumes = { MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_ATOM_XML_VALUE }, produces = {MediaType.APPLICATION_JSON_VALUE })
+		public ResponseEntity<ResponseStructure<Hospital>> saveHospital(@RequestBody Hospital hospital) {
+			return hospitalService.saveHospital(hospital);
+		}
+		
+		@ApiOperation(value = "Update Hospital", notes = "It is used to update the hospital")
+		@ApiResponses(value = { @ApiResponse(code = 201, message = "created"),
+				@ApiResponse(code = 500, message = "internal ServerError"),
+				@ApiResponse(code = 404, message = "notfound") })
+		@PutMapping(consumes = { MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_ATOM_XML_VALUE }, produces = {MediaType.APPLICATION_JSON_VALUE })
+		public ResponseEntity<ResponseStructure<Hospital>> updateHospital(@RequestBody Hospital hospital,
+				@RequestParam int id) {
+			return hospitalService.updateHospitalById(hospital, id);
+		
+		}
+		
+		@ApiOperation(value = "Get hospital by Id", notes = "It is used to get the hospital by Id")
+		@ApiResponses(value = { @ApiResponse(code = 201, message = "created"),
+				@ApiResponse(code = 500, message = "internal ServerError"),
+				@ApiResponse(code = 404, message = "notfound") })
+		@GetMapping(produces = {MediaType.APPLICATION_JSON_VALUE })
+		public ResponseEntity<ResponseStructure<Hospital>> getHospitalById(@RequestParam int id) {
+			return hospitalService.getHospitalById(id);
+		
+		}
+		
+		@ApiOperation(value = "Delete hospital by Id", notes = "It is used to delete the hospital by Id")
+		@ApiResponses(value = { @ApiResponse(code = 201, message = "created"),
+				@ApiResponse(code = 500, message = "internal ServerError"),
+				@ApiResponse(code = 404, message = "notfound") })
+		@DeleteMapping(value="/{id}",produces = {MediaType.APPLICATION_JSON_VALUE })
+		public ResponseEntity<ResponseStructure<String>> deleteHospitalById(@RequestParam int id) {
+			return hospitalService.deleteHospitalById(id);
+		
+		}
 }

@@ -1,10 +1,13 @@
 package com.ty.hospital_boot.hospital_spring.dto;
 
+import java.util.List;
+
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 
 @Entity
@@ -14,8 +17,18 @@ public class Hospital {
 	private int id;
 	private String name;
 	
-	@OneToOne(cascade = CascadeType.ALL)
-	private Branch branch;
+	@OneToMany(cascade = CascadeType.ALL)
+	private List<Branch> branch;
+	
+	
+
+	public void setBranch(List<Branch> branch) {
+		this.branch = branch;
+	}
+
+	public List<Branch> getBranch() {
+		return branch;
+	}
 
 	public int getId() {
 		return id;
@@ -33,18 +46,14 @@ public class Hospital {
 		this.name = name;
 	}
 
-	public Branch getBranch() {
-		return branch;
-	}
-
-	public void setBranch(Branch branch) {
-		this.branch = branch;
-	}
-
 	@Override
 	public String toString() {
 		return "Hospital [id=" + id + ", name=" + name + ", branch=" + branch + "]";
 	}
+
+
+	
+	
 	
 	
 	

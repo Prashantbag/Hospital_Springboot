@@ -9,6 +9,7 @@ import com.ty.hospital_boot.hospital_spring.dao.ItemsDao;
 import com.ty.hospital_boot.hospital_spring.dto.Encounter;
 import com.ty.hospital_boot.hospital_spring.dto.Items;
 import com.ty.hospital_boot.hospital_spring.dto.Medorder;
+import com.ty.hospital_boot.hospital_spring.exception.NoSuchIdFoundException;
 import com.ty.hospital_boot.hospital_spring.util.ResponseStructure;
 
 @Service
@@ -19,14 +20,14 @@ public class ItemsService {
 	public ResponseEntity<ResponseStructure<Items>> updateItemsById(Items items,int id){
 		ResponseStructure<Items> responseStructure=new ResponseStructure<Items>();
 		ResponseEntity<ResponseStructure<Items>> responseEntity=new ResponseEntity<ResponseStructure<Items>>(responseStructure,HttpStatus.OK);
-		Items items2=dao.getEncounterById(id);
+		Items items2=dao.getItemsById(id);
 		if(items2!=null) {
 			items.setId(id);
 			responseStructure.setStatus(HttpStatus.OK.value());
 			responseStructure.setMessage("updated");
-			responseStructure.setData(dao.saveItems(items));
+			responseStructure.setData(dao.updateItems(items,id));
 		}else {
-			throw new NoSuchIdUpdate("No Such Id To Be Updated");
+			throw new NoSuchIdFoundException("No Such Id To Be Updated");
 		}
 		return responseEntity;
 	}

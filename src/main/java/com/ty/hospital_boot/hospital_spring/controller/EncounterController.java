@@ -22,21 +22,13 @@ import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;
 
 @RestController
-@RequestMapping
+@RequestMapping("encounter")
 public class EncounterController {
 
 	@Autowired
 	private EncounterService encounterService;
 
-	@ApiOperation(value = "Save Encounter", notes = "It is used to save the Encounter")
-	@ApiResponses(value = { @ApiResponse(code = 201, message = "created"),
-			@ApiResponse(code = 500, message = "Internal Server Error"),
-			@ApiResponse(code = 404, message = "Not found") })
-	@PostMapping(consumes = { MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_ATOM_XML_VALUE }, produces = {
-			MediaType.APPLICATION_JSON_VALUE })
-	public ResponseEntity<ResponseStructure<Encounter>> saveEncounter(@RequestBody Encounter encounter) {
-		return encounterService.saveencounter(encounter);
-	}
+
 
 	@ApiOperation(value = "Update Encounter", notes = "It is used to update the Encounter")
 	@ApiResponses(value = { @ApiResponse(code = 201, message = "created"),
@@ -44,9 +36,9 @@ public class EncounterController {
 			@ApiResponse(code = 404, message = "Not found") })
 	@PutMapping(consumes = { MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_ATOM_XML_VALUE }, produces = {
 			MediaType.APPLICATION_JSON_VALUE })
-	public ResponseEntity<ResponseStructure<Encounter>> updateEncounter(@RequestBody Encounter encounter,
+	public ResponseEntity<ResponseStructure<Encounter>> updateEncounterById(@RequestBody Encounter encounter,
 			@RequestParam int id) {
-		return encounterService.updateencounter(encounter, id);
+		return encounterService.updateEncounterById(encounter, id);
 
 	}
 
@@ -57,17 +49,9 @@ public class EncounterController {
 	@GetMapping( produces = {
 			MediaType.APPLICATION_JSON_VALUE })
 	public ResponseEntity<ResponseStructure<Encounter>> getEncounterById(@RequestParam int id) {
-		return encounterService.getencouter(id);
+		return encounterService.getEncounterById(id);
 
 	}
 
-	@ApiOperation(value = "Delete Encounter by Id ", notes = "It is used to delete the Encounter by Id")
-	@ApiResponses(value = { @ApiResponse(code = 201, message = "created"),
-			@ApiResponse(code = 500, message = "Internal Server Error"),
-			@ApiResponse(code = 404, message = "Not found") })
-	@DeleteMapping(value="/{id}",produces = {MediaType.APPLICATION_JSON_VALUE})
-	public ResponseEntity<ResponseStructure<String>> deleteencounterById(@RequestParam int id) {
-		return encounterService.deleteencounter(id);
 
-	}
 }
