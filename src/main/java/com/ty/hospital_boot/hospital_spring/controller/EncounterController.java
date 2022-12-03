@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.ty.hospital_boot.hospital_spring.dto.Encounter;
 import com.ty.hospital_boot.hospital_spring.dto.Hospital;
+import com.ty.hospital_boot.hospital_spring.dto.Person;
 import com.ty.hospital_boot.hospital_spring.service.EncounterService;
 import com.ty.hospital_boot.hospital_spring.util.ResponseStructure;
 
@@ -61,7 +62,7 @@ public class EncounterController {
 	
 	@PostMapping(consumes = { MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_ATOM_XML_VALUE }, produces = {
 			MediaType.APPLICATION_JSON_VALUE })
-	public  ResponseEntity<ResponseStructure<Encounter>> saveEncounter(@RequestBody Encounter encounter,@PathVariable int pid,@RequestParam int bid){
+	public  ResponseEntity<ResponseStructure<Person>> saveEncounter(@RequestBody Encounter encounter,@PathVariable int pid,@RequestParam int bid){
 		return encounterService.saveEncounter(encounter, pid, bid);
 		
 	}
